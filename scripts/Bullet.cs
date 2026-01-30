@@ -4,7 +4,7 @@ using System;
 public partial class Bullet : Area2D
 {
 
-	private int _speed = 750;
+	[Export] public float Speed = 400f;
 
 	public override void _Ready()
 	{
@@ -13,7 +13,7 @@ public partial class Bullet : Area2D
 	
 	public override void _PhysicsProcess(double delta)
 	{
-		Position += Transform.X * _speed * (float)delta;
+		Position += Transform.X * Speed * (float)delta;
 	}
 
 	private void OnBodyEntered(Node2D body)
