@@ -4,9 +4,13 @@ public enum Area
 {
     Street,
     Grassland,
+    Wasteland,
     Pond,
     Forest,
     House
 }
 
-private 
+public static class Areas
+{
+    public static int Size => 10;
+}
