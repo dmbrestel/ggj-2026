@@ -1,22 +1,34 @@
+using GGJ2026.scripts.terrain;
 using Godot;
 
 namespace GGJ2026.scripts;
 
 public partial class MapGenerator : Node
 {
-	private TileMapLayer TerrainLayer { get; set; }
+	[Export]
+	public int Size { get; set; } = 20;
 	
 	public override void _Ready()
 	{
-		TerrainLayer = GetNode<TileMapLayer>("TerrainLayer");
+		var terrainLayer = GetNode<TileMapLayer>("TerrainLayer");
 		
-		for (var x = -10; x <= 10; x++)
+		RandomNumberGenerator rng = new();
+		Map map = new(rng, Size);
+		
+		map.Place((pos, area) =>
 		{
-			for (var y = -10; y <= 10; y++)
+			var terrain = area switch
 			{
-				TerrainLayer.SetCell(new Vector2I(x, y), 1, new Vector2I(1, 1));
-			}
-		}
+				Area.Street => Terrain.Asphalt,
+				Area.Grassland => Terrain.Grass,
+				Area.Pond => Terrain.Water,
+				Area.Forest => Terrain.Grass,
+				Area.House => Terrain.House,
+				_ => Terrain.Grass
+			};
+			
+			
+		});
 	}
 	
 	public override void _Process(double delta)

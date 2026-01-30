@@ -11,22 +11,23 @@ texture_region_size = Vector2i(32, 32)
 1:1/0 = 0
 0:1/0 = 0
 0:2/0 = 0
-3:1/0 = 0
-3:0/0 = 0
-2:0/0 = 0
-2:1/0 = 0
 1:2/0 = 0
+1:3/0 = 0
+0:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ij1v8"]
+tile_shape = 1
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_bl13t")
 
 [node name="Node2D" type="Node2D" unique_id=1771555354]
 
-[node name="Node" type="Node" parent="." unique_id=1134569044]
+[node name="Node2D" type="Node2D" parent="." unique_id=1088554373]
 script = ExtResource("1_bl13t")
 
-[node name="TerrainLayer" type="TileMapLayer" parent="Node" unique_id=1573595366]
+[node name="TerrainLayer" type="TileMapLayer" parent="Node2D" unique_id=1573595366]
 tile_set = SubResource("TileSet_ij1v8")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=415095711]
