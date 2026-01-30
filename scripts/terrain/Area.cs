@@ -7,7 +7,8 @@ public enum Area
     Wasteland,
     Pond,
     Forest,
-    House
+    House,
+    Ocean
 }
 
 public static class Areas

@@ -15,6 +15,9 @@ public partial class MapGenerator : Node
 		var rng = new RandomNumberGenerator();
 		var map = new Map(rng, Size);
 		
+		var totalSize = new Vector2I(Size * Areas.Size, Size * Areas.Size);
+		var offset = -(totalSize / Areas.Size);
+		
 		map.Place((position, area) =>
 		{
 			var terrain = area switch
@@ -25,6 +28,7 @@ public partial class MapGenerator : Node
 				Area.Pond => Terrain.Water,
 				Area.Forest => Terrain.Grass,
 				Area.House => Terrain.House,
+				Area.Ocean => Terrain.Water,
 				_ => Terrain.Grass
 			};
 			
@@ -32,13 +36,29 @@ public partial class MapGenerator : Node
 			{
 				for (var y = 0; y < Areas.Size; y++)
 				{
-					var tilePosition = new Vector2I(position.X * Areas.Size + x, position.Y * Areas.Size + y);
-					var randomOffset = (x + y) % 2;
+					var tilePosition = new Vector2I(position.X * Areas.Size + x, position.Y * Areas.Size + y) + offset;
+					var randomOffset = rng.RandiRange(0, 1);
 					
-					terrainLayer.SetCell(tilePosition, 0, new Vector2I(randomOffset, (int) terrain));
+					var orthogonalPosition = new Vector2I(tilePosition.Y, tilePosition.X - totalSize.Y / 2);
+					terrainLayer.SetCell(orthogonalPosition, 0, new Vector2I(randomOffset, (int) terrain));
 				}
 			}
 		});
+		
+		return;
+
+		void PlaceStreet(Vector2I areaPosition)
+		{
+			for (var x = 0; x < Areas.Size; x++)
+			{
+				for (var y = 0; y < Areas.Size; y++)
+				{
+					var tilePosition = new Vector2I(areaPosition.X * Areas.Size + x, areaPosition.Y * Areas.Size + y);
+					
+					
+				}
+			}
+		}
 	}
 	
 	public override void _Process(double delta)
