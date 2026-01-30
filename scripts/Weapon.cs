@@ -10,6 +10,10 @@ public partial class Weapon : Node2D
 	private Node2D _owner;
 	private Marker2D _muzzle;
 	private bool _canFire = true;
+	private bool _canReload = true;
+	private const int MagSize = 6;
+	public int AmmoInMag = 6;
+	public int Ammunition = 12; 
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -36,13 +40,37 @@ public partial class Weapon : Node2D
 	public void TryShoot()
 	{
 		if (!_canFire) return;
+		if (AmmoInMag <= 0) return;
 
 		var bullet = Bullet.Instantiate<Area2D>();
 		GetTree().CurrentScene.AddChild(bullet);
 		bullet.GlobalPosition = _muzzle.GlobalPosition;
 		bullet.Rotation = Rotation;
+		
+		AmmoInMag--;
+		GD.Print($"AmmoInMag{AmmoInMag}");
 
 		StartCoolDown();
+	}
+
+	public void Reload()
+	{
+		if (!_canReload) return;
+		if (Ammunition <= 0) return;
+
+		var bulletsReloaded = Math.Min(MagSize - AmmoInMag, Ammunition);
+		Ammunition -= bulletsReloaded;
+		AmmoInMag += bulletsReloaded;
+		GD.Print($"AmmoInMag{AmmoInMag}");
+		GD.Print($"Ammunition{Ammunition}");
+		
+		// rotate sprite
+		var sprite = GetNode<Sprite2D>("Sprite2D");
+		var tween = CreateTween();
+		tween.TweenProperty(sprite, "rotation", Mathf.Tau, 0.4f).From(0f);
+		
+		StartCoolDown();
+
 	}
 
 	private async void StartCoolDown()

@@ -18,7 +18,11 @@ public partial class Player : CharacterBody2D
 		if (@event.IsActionPressed("shoot"))
 		{
 			_weapon.TryShoot();
+		} else if (@event.IsActionPressed("reload"))
+		{
+			_weapon.Reload();
 		}
+
 	}
 
 	public override void _PhysicsProcess(double delta)
