@@ -28,7 +28,9 @@ public partial class Weapon : Node2D
 		LookAt(GetGlobalMousePosition());
 
 		var sprite = GetNode<Sprite2D>("Sprite2D");
-		sprite.FlipV = GetGlobalMousePosition().X < GlobalPosition.X;
+		bool flipped = GetGlobalMousePosition().X < GlobalPosition.X;
+		sprite.FlipV = flipped;
+		_muzzle.Position = new Vector2(_muzzle.Position.X, Mathf.Abs(_muzzle.Position.Y) * (flipped ? 1 : -1));
 	}
 
 	public void TryShoot()
