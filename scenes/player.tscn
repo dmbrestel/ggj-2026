@@ -19,6 +19,7 @@ animations = [{
 size = Vector2(128, 129)
 
 [node name="Player" type="CharacterBody2D" unique_id=2029222254]
+position = Vector2(0, 1)
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1362948367]
@@ -30,3 +31,4 @@ position = Vector2(-1, -1)
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="Weapon" parent="." unique_id=1725967702 instance=ExtResource("3_qhqgy")]
+scale = Vector2(0.1, 0.1)
