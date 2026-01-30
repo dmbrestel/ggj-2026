@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dm6qoe57l87ub"]
+
+[ext_resource type="Texture2D" uid="uid://wwkft6jv365j" path="res://art/tileset.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://qqimajnqs83i" path="res://scripts/Player.cs" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://4vffl1nuxw3g" path="res://scenes/weapon.tscn" id="3_qhqgy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g2els"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3vyb7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+size = Vector2(128, 129)
+
+[node name="Player" type="CharacterBody2D" unique_id=2029222254]
+script = ExtResource("1_g2els")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1362948367]
+position = Vector2(-1, 0)
+sprite_frames = SubResource("SpriteFrames_g2els")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=725724936]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_g2els")
+
+[node name="Weapon" parent="." unique_id=1725967702 instance=ExtResource("3_qhqgy")]
