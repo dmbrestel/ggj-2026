@@ -18,6 +18,7 @@ public partial class Player : CharacterBody2D
 	private ProgressBar _healthBar;
 	private Label _ammoLabel;
 	private AnimatedSprite2D _sprite;
+	private Sprite2D[] _oxygenSprites;
 	
 	// movement animation
 	private float _bobTime;
@@ -31,6 +32,8 @@ public partial class Player : CharacterBody2D
 	private float _health = 1.0f;
 	private float _maxHealth = 1.0f;
 	private float _healthDecreaseRate;
+
+	public int OxygenCarried { get; private set; } = 0;
 
 	private int _ticksPerSecond = Engine.PhysicsTicksPerSecond;
 	
@@ -56,6 +59,12 @@ public partial class Player : CharacterBody2D
 		_originalOffset = _sprite.Offset;
 		
 		_canvasLayer = GetNode<CanvasLayer>("/root/Node2D/CanvasLayer");
+
+		_oxygenSprites = new Sprite2D[3];
+		for (int i = 0; i < 3; i++)
+		{
+			_oxygenSprites[i] = GetNode<Sprite2D>($"/root/Node2D/CanvasLayer/UserInterface/Ammunition/Oxygen{i+1}");
+		}
 	}
 
 	public override void _Input(InputEvent @event)
@@ -66,9 +75,32 @@ public partial class Player : CharacterBody2D
 		} else if (@event.IsActionPressed("reload"))
 		{
 			_weapon.Reload();
+		} else if (@event.IsActionPressed("refill"))
+		{
+			if (OxygenCarried > 0)
+			{
+				_oxygen = _maxOxygen;
+				OxygenCarried--;
+			}
 		}
+		
 		// update ammo display after weapon actions
 		_ammoLabel.SetText($"{_weapon.AmmoInMag} / {_weapon.Ammunition}");
+		
+		// update oxygen display
+		for (int i = 0; i < _oxygenSprites.Length; i++)
+		{
+			if (i < OxygenCarried)
+			{
+				_oxygenSprites[i].Visible = true;
+			}
+			else
+			{
+				_oxygenSprites[i].Visible = false;
+			}
+		}
+		
+		
 
 	}
 
@@ -162,6 +194,6 @@ public partial class Player : CharacterBody2D
 
 	public void AddOxygen()
 	{
-		_oxygen = _maxOxygen;
+		if (OxygenCarried < 3) OxygenCarried++;
 	}
 }
