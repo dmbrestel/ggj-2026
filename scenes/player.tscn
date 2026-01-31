@@ -77,6 +77,7 @@ OxygenLasts = 60.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1362948367]
 position = Vector2(-1, 0)
+scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_g2els")
 frame = 3
 frame_progress = 0.27032283
