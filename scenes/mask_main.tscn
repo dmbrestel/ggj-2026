@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bt613pmenlhkq"]
+
+[ext_resource type="Script" uid="uid://dagyxnvqkt1vk" path="res://scripts/Mask.cs" id="1_mask"]
+[ext_resource type="Texture2D" uid="uid://chagfo87fj7kr" path="res://art/MaskMain.png" id="2_mask"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0"]
+atlas = ExtResource("2_mask")
+region = Rect2(0, 0, 1000, 2000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1"]
+atlas = ExtResource("2_mask")
+region = Rect2(1000, 0, 1000, 2000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2"]
+atlas = ExtResource("2_mask")
+region = Rect2(2000, 0, 1000, 2000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3"]
+atlas = ExtResource("2_mask")
+region = Rect2(3000, 0, 1000, 2000)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mask"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Mask" type="Node2D" unique_id=1150391531]
+script = ExtResource("1_mask")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1101529593]
+sprite_frames = SubResource("SpriteFrames_mask")
+frame = 3
