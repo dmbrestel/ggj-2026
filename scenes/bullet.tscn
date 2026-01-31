@@ -6,6 +6,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eoqba"]
 size = Vector2(10, 9)
 
+[sub_resource type="Gradient" id="Gradient_y25gk"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_l5glv"]
+gradient = SubResource("Gradient_y25gk")
+width = 53
+height = 9
+
 [node name="Bullet" type="Area2D" unique_id=815471038]
 position = Vector2(4, -1)
 collision_mask = 2
@@ -19,3 +26,6 @@ texture = ExtResource("2_l5glv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=582527656]
 position = Vector2(22, 0)
 shape = SubResource("RectangleShape2D_eoqba")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1282430444]
+texture = SubResource("GradientTexture2D_l5glv")

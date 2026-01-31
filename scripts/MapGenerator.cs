@@ -174,6 +174,29 @@ public partial class MapGenerator : Node
 					
 					var isAtEdge = x == 0 || x == Areas.Size.X - 1 || y == 0 || y == Areas.Size.Y - 1;
 					SetCell(terrainLayer, tilePosition, isAtEdge ? Terrain.Grass : Terrain.House, rng);
+
+					var isAtWall = x == 1 || x == Areas.Size.X - 2 || y == 1 || y == Areas.Size.Y - 2;
+					if (isAtWall)
+					{
+						var objectId = 2;
+						
+						var wx = x - 1;
+						var wy = y - 1;
+						
+						var mx = Areas.Size.X - 2;
+						var my = Areas.Size.Y - 2;
+
+						if (wx == 0 && wy != 0) objectId = 2;
+						else if (wx == mx && wy != 0) objectId = 3;
+						else if (wy == 0 && wx != 0) objectId = 4;
+						else if (wy == my && wx != 0) objectId = 5;
+						else if (wx == 0 && wy == 0) objectId = 6;
+						else if (wx == 0 && wy == my) objectId = 7;
+						else if (wx == mx && wy == 0) objectId = 8;
+						else if (wx == mx && wy == my) objectId = 9;
+						
+						SetCell(objectLayer, tilePosition, objectId);
+					}
 				}
 			}
 		}
