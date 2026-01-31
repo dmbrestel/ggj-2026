@@ -28,6 +28,7 @@ texture_region_size = Vector2i(256, 128)
 texture = ExtResource("4_at5dv")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-14, -1, 0, 27, 13, 0, 0, -48)
 
 [sub_resource type="TileSet" id="TileSet_ij1v8"]
 tile_shape = 1
@@ -49,10 +50,10 @@ color = Color(0.16924527, 0.1692453, 0.16924527, 1)
 [node name="Node2D" type="Node2D" parent="." unique_id=1088554373]
 script = ExtResource("1_bl13t")
 
-[node name="ObjectLayer" type="TileMapLayer" parent="Node2D" unique_id=653912692]
+[node name="TerrainLayer" type="TileMapLayer" parent="Node2D" unique_id=1573595366]
 tile_set = SubResource("TileSet_ij1v8")
 
-[node name="TerrainLayer" type="TileMapLayer" parent="Node2D" unique_id=1573595366]
+[node name="ObjectLayer" type="TileMapLayer" parent="Node2D" unique_id=653912692]
 tile_set = SubResource("TileSet_ij1v8")
 
 [node name="Player" parent="." unique_id=2029222254 instance=ExtResource("3_iyx0m")]

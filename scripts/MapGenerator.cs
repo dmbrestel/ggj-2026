@@ -23,18 +23,6 @@ public partial class MapGenerator : Node
 		
 		map.Place((position, area) =>
 		{
-			var terrain = area switch
-			{
-				Area.Street => Terrain.Asphalt,
-				Area.Grassland => Terrain.Grass,
-				Area.Wasteland => Terrain.Sand,
-				Area.Pond => Terrain.Water,
-				Area.Forest => Terrain.Grass,
-				Area.House => Terrain.House,
-				Area.Ocean => Terrain.Water,
-				_ => Terrain.Grass
-			};
-
 			switch (area)
 			{
 				case Area.Street:
@@ -64,15 +52,6 @@ public partial class MapGenerator : Node
 				case Area.Ocean:
 					PlaceOcean(position);
 					return;
-			}
-			
-			for (var x = 0; x < Areas.Size.X; x++)
-			{
-				for (var y = 0; y < Areas.Size.Y; y++)
-				{
-					var tilePosition = new Vector2I(position.X * Areas.Size.X + x, position.Y * Areas.Size.Y + y) + offset;
-					SetCell(terrainLayer, tilePosition, terrain, rng);
-				}
 			}
 		});
 		
