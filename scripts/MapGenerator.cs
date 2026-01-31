@@ -85,6 +85,15 @@ public partial class MapGenerator : Node
 							
 							continue;
 						}
+
+						var center = new Vector2I(Areas.Size.X / 2, Areas.Size.Y / 2);
+						
+						if ((x == center.X || y == center.Y) && map.GetArea(adjacentAreaPosition.X, adjacentAreaPosition.Y) == Area.House)
+						{
+							SetCell(terrainLayer, tilePosition, Terrain.Asphalt, rng);
+							
+							continue;
+						}
 					}
 					else if (!isAtEdge && !isAtCorner)
 					{
@@ -166,6 +175,19 @@ public partial class MapGenerator : Node
 		
 		void PlaceHouse(Vector2I areaPosition)
 		{
+			var directionToStreet = Vector2I.Zero;
+			foreach (var (nx, ny) in new[] { new Vector2I(-1, 0), new Vector2I(1, 0), new Vector2I(0, -1), new Vector2I(0, 1) })
+			{
+				var neighborArea = map.GetArea(areaPosition.X + nx, areaPosition.Y + ny);
+				if (neighborArea != Area.Street) continue;
+				directionToStreet = new Vector2I(nx, ny);
+				break;
+			}
+			
+			var center = new Vector2I(Areas.Size.X / 2, Areas.Size.Y / 2);
+			var doorPosition = center + directionToStreet * (Areas.Size.X / 2 - 1);
+			var doorStreetPosition = center + directionToStreet * (Areas.Size.X / 2 - 0);
+			
 			for (var x = 0; x < Areas.Size.X; x++)
 			{
 				for (var y = 0; y < Areas.Size.Y; y++)
@@ -174,26 +196,33 @@ public partial class MapGenerator : Node
 					
 					var isAtEdge = x == 0 || x == Areas.Size.X - 1 || y == 0 || y == Areas.Size.Y - 1;
 					SetCell(terrainLayer, tilePosition, isAtEdge ? Terrain.Grass : Terrain.House, rng);
-
+					
+					if (x == doorStreetPosition.X && y == doorStreetPosition.Y)
+					{
+						SetCell(terrainLayer, tilePosition, Terrain.Asphalt, rng);
+					}
+					
+					var isDoor = x == doorPosition.X && y == doorPosition.Y;
+					
 					var isAtWall = x == 1 || x == Areas.Size.X - 2 || y == 1 || y == Areas.Size.Y - 2;
-					if (isAtWall)
+					if (!isDoor && isAtWall && x > 0 && x < Areas.Size.X - 1 && y > 0 && y < Areas.Size.Y - 1)
 					{
 						var objectId = 2;
 						
 						var wx = x - 1;
 						var wy = y - 1;
 						
-						var mx = Areas.Size.X - 2;
-						var my = Areas.Size.Y - 2;
-
-						if (wx == 0 && wy != 0) objectId = 2;
-						else if (wx == mx && wy != 0) objectId = 3;
-						else if (wy == 0 && wx != 0) objectId = 4;
-						else if (wy == my && wx != 0) objectId = 5;
-						else if (wx == 0 && wy == 0) objectId = 6;
-						else if (wx == 0 && wy == my) objectId = 7;
-						else if (wx == mx && wy == 0) objectId = 8;
-						else if (wx == mx && wy == my) objectId = 9;
+						var mx = Areas.Size.X - 3;
+						var my = Areas.Size.Y - 3;
+						
+						if (wx == 0 && wy == 0) objectId = 11;
+						else if (wx == 0 && wy == my) objectId = 10;
+						else if (wx == mx && wy == 0) objectId = 12;
+						else if (wx == mx && wy == my) objectId = 13;
+						else if (wx == 0) objectId = 2;
+						else if (wx == mx) objectId = 9;
+						else if (wy == 0) objectId = 8;
+						else if (wy == my) objectId = 3;
 						
 						SetCell(objectLayer, tilePosition, objectId);
 					}
