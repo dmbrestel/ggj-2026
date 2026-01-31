@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bq103t0tacq1r"]
 
 [ext_resource type="Script" uid="uid://qqimajnqs83i" path="res://scripts/Player.cs" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://c7furvccuweb3" path="res://scenes/endscreen.tscn" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://dhpo5gxxpmh78" path="res://art/BodyMain.png" id="2_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://4vffl1nuxw3g" path="res://scenes/weapon.tscn" id="3_qhqgy"]
 
@@ -84,6 +85,7 @@ fill_to = Vector2(0.88646287, 0.8558952)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_g2els")
 OxygenLasts = 60.0
+EndScreenScene = ExtResource("2_dqkch")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1362948367]
 position = Vector2(-1, 0)

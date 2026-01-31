@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://c7furvccuweb3"]
+
+[ext_resource type="Script" uid="uid://nm7ssee5140w" path="res://scenes/EndScreen.cs" id="1_dt0yg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_evstm"]
+font_size = 383
+
+[sub_resource type="LabelSettings" id="LabelSettings_dt0yg"]
+font_size = 72
+
+[node name="Control" type="Control" unique_id=1819202073 node_paths=PackedStringArray("StuffLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dt0yg")
+StuffLabel = NodePath("Timer")
+
+[node name="Label" type="Label" parent="." unique_id=1668686445]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+text = "YOU DIED"
+label_settings = SubResource("LabelSettings_evstm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Label" parent="." unique_id=1562952512]
+layout_mode = 0
+offset_top = -44.0
+offset_right = 1920.0
+offset_bottom = 885.0
+text = "BLA BLA BLA"
+label_settings = SubResource("LabelSettings_dt0yg")
+horizontal_alignment = 1
+vertical_alignment = 2

@@ -5,6 +5,9 @@ public partial class Player : CharacterBody2D
 {
 	[Export] public float Speed = 200f;
 	[Export] public float OxygenLasts = 30.0f;
+	[Export] public float HealthLasts = 45.0f;
+	
+	[Export] PackedScene EndScreenScene;
 
 	// nodes
 	private Weapon _weapon;
@@ -14,7 +17,7 @@ public partial class Player : CharacterBody2D
 	private AnimatedSprite2D _sprite;
 	
 	// movement animation
-	private float _bobTime = 0f;
+	private float _bobTime;
 	private Vector2 _originalOffset;
 	
 	// ressources
@@ -24,6 +27,7 @@ public partial class Player : CharacterBody2D
 
 	private float _health = 1.0f;
 	private float _maxHealth = 1.0f;
+	private float _healthDecreaseRate;
 
 	private int _ticksPerSecond = Engine.PhysicsTicksPerSecond;
 	
@@ -36,6 +40,7 @@ public partial class Player : CharacterBody2D
 		_oxygenDecreaseRate = _maxOxygen / (OxygenLasts * _ticksPerSecond);
 		_oxygenBar = GetNode<ProgressBar>("/root/Node2D/CanvasLayer/UserInterface/Oxygen");
 		
+		_healthDecreaseRate = _maxHealth / (HealthLasts * _ticksPerSecond);
 		_healthBar = GetNode<ProgressBar>("/root/Node2D/CanvasLayer/UserInterface/Health");
 		
 		_ammoLabel = GetNode<Label>("/root/Node2D/CanvasLayer/UserInterface/Ammunition");
@@ -90,10 +95,25 @@ public partial class Player : CharacterBody2D
 		
 		// oxygen decrease
 		_oxygen -= _oxygenDecreaseRate;
+		
+		if (_oxygen <= 0f)
+		{
+			_health -= _healthDecreaseRate;
+			_oxygen = 0f;
+		}
+		
 		_oxygenBar.SetValue(_oxygen);
 		
 		// health management
 		_healthBar.SetValue(_health);
+		
+		if (_health <= 0f)
+		{
+			GetTree().Paused = true;
+			var endScreen = EndScreenScene.Instantiate<EndScreen>();
+			GetTree().Root.AddChild(endScreen);
+			endScreen.SetValues(Timer.GameTime, EggCount);
+		}
 		
 	}
 
