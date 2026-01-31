@@ -10,6 +10,7 @@ public partial class Player : CharacterBody2D
 	private Weapon _weapon;
 	private ProgressBar _oxygenBar;
 	private ProgressBar _healthBar;
+	private Label _ammoLabel;
 	
 	private float _oxygen = 1.0f;
 	private float _maxOxygen = 1.0f;
@@ -30,6 +31,8 @@ public partial class Player : CharacterBody2D
 		_oxygenBar = GetNode<ProgressBar>("/root/Node2D/CanvasLayer/UserInterface/Oxygen");
 		
 		_healthBar = GetNode<ProgressBar>("/root/Node2D/CanvasLayer/UserInterface/Health");
+		
+		_ammoLabel = GetNode<Label>("/root/Node2D/CanvasLayer/UserInterface/Ammunition");
 	}
 
 	public override void _Input(InputEvent @event)
@@ -41,6 +44,8 @@ public partial class Player : CharacterBody2D
 		{
 			_weapon.Reload();
 		}
+		// update ammo display after weapon actions
+		_ammoLabel.SetText($"{_weapon.AmmoInMag} / {_weapon.Ammunition}");
 
 	}
 
@@ -65,5 +70,11 @@ public partial class Player : CharacterBody2D
 		// health management
 		_healthBar.SetValue(_health);
 		
+	}
+
+	public void AddAmmo(int ammo)
+	{
+		_weapon.Ammunition += ammo;
+		_ammoLabel.SetText($"{_weapon.AmmoInMag} / {_weapon.Ammunition}");
 	}
 }
