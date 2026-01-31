@@ -44,7 +44,7 @@ sources/1 = SubResource("TileSetAtlasSource_jcd4p")
 [node name="UserInterface" parent="CanvasLayer" unique_id=73815526 instance=ExtResource("4_74lek")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=886564131]
-color = Color(0.27741227, 0.30291083, 0.12377448, 1)
+color = Color(0.16924527, 0.1692453, 0.16924527, 1)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1088554373]
 script = ExtResource("1_bl13t")
