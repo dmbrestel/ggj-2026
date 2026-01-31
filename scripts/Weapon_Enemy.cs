@@ -5,7 +5,7 @@ public partial class Weapon_Enemy : Node2D
 {
 
 	[Export] public PackedScene Bullet;
-	public float FireRate = 0.7f;
+	public float FireRate = 0.1f;
 	public Node2D PlayerNode;
 
 	private Node2D _owner;

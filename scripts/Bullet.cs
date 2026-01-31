@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using GGJ2026.scripts;
 
 public partial class Bullet : Area2D
 {
@@ -21,6 +22,16 @@ public partial class Bullet : Area2D
 
 	private void OnBodyEntered(Node2D body)
 	{
+		if (body is Player player)
+		{
+			player.TakeDamage();
+		}
+
+		if (body is Enemy enemy)
+		{
+			enemy.TakeDamage();
+		}
+		
 		QueueFree();
 	}
 }
