@@ -16,7 +16,7 @@ public partial class EndScreen : Control
 			GetTree().Paused = false;
 			GetTree().ReloadCurrentScene();
 
-			Player.EggCount = 0;
+			scripts.Player.EggCount = 0;
 		};
 	}
 	

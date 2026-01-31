@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace GGJ2026.scenes;
+
 public partial class Timer : Label
 {
 	private double _timeElapsed;

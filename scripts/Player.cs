@@ -1,5 +1,7 @@
-using Godot;
 using System;
+using Godot;
+
+namespace GGJ2026.scripts;
 
 public partial class Player : CharacterBody2D
 {
@@ -116,7 +118,7 @@ public partial class Player : CharacterBody2D
 			GetTree().Paused = true;
 			var endScreen = EndScreenScene.Instantiate<GGJ2026.scenes.EndScreen>();
 			_canvasLayer.CallDeferred("add_child", endScreen);
-			endScreen.SetValues(Timer.GameTime, EggCount);
+			endScreen.SetValues(GGJ2026.scenes.Timer.GameTime, EggCount);
 		}
 		
 	}
