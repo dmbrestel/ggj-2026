@@ -69,7 +69,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
-size = Vector2(128, 129)
+size = Vector2(48, 150)
 
 [sub_resource type="Gradient" id="Gradient_qhqgy"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -93,7 +93,7 @@ frame = 3
 frame_progress = 0.27032283
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=725724936]
-position = Vector2(-1, -1)
+position = Vector2(2, 1)
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="Weapon" parent="." unique_id=1725967702 instance=ExtResource("3_qhqgy")]
