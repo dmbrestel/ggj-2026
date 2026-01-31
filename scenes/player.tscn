@@ -101,7 +101,8 @@ position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="Weapon" parent="." unique_id=1725967702 instance=ExtResource("3_qhqgy")]
-position = Vector2(41, -1)
+z_index = 2
+position = Vector2(1.1920929e-07, -42)
 scale = Vector2(0.1, 0.1)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1832647018]
