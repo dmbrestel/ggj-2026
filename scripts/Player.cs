@@ -79,8 +79,8 @@ public partial class Player : CharacterBody2D
 			_sprite.Frame = AngleToFrame(angle);
 			
 			// up and down
-			_bobTime += (float)delta * 10f;
-			_sprite.Offset = _originalOffset + new Vector2(0, Mathf.Sin(_bobTime) * 2f);
+			_bobTime += (float)delta * 15f;
+			_sprite.Offset = _originalOffset + new Vector2(0, Mathf.Sin(_bobTime) * 50f);
 		}
 		else
 		{
