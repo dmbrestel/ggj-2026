@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c7furvccuweb3" path="res://scenes/endscreen.tscn" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://dhpo5gxxpmh78" path="res://art/BodyMain.png" id="2_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://4vffl1nuxw3g" path="res://scenes/weapon.tscn" id="3_qhqgy"]
+[ext_resource type="PackedScene" uid="uid://bt613pmenlhkq" path="res://scenes/mask_main.tscn" id="4_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
 atlas = ExtResource("2_qhqgy")
@@ -88,6 +89,7 @@ OxygenLasts = 60.0
 EndScreenScene = ExtResource("2_dqkch")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1362948367]
+z_index = 1
 position = Vector2(-1, 0)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_g2els")
@@ -105,3 +107,8 @@ scale = Vector2(0.1, 0.1)
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1832647018]
 texture = SubResource("GradientTexture2D_dqkch")
 texture_scale = 8.07
+
+[node name="Mask" parent="." unique_id=8541461 instance=ExtResource("4_dqkch")]
+z_index = 1
+position = Vector2(2.0000038, -100.00001)
+scale = Vector2(0.1, 0.1)

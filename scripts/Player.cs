@@ -13,6 +13,7 @@ public partial class Player : CharacterBody2D
 
 	// nodes
 	private Weapon _weapon;
+	private Mask _mask;
 	private ProgressBar _oxygenBar;
 	private ProgressBar _healthBar;
 	private Label _ammoLabel;
@@ -40,8 +41,10 @@ public partial class Player : CharacterBody2D
 	{
 		_weapon = GetNode<Weapon>("Weapon");
 		_weapon.Initialize(this);
-		
-		_oxygenDecreaseRate = _maxOxygen / (OxygenLasts * _ticksPerSecond);
+		_mask = GetNode<Mask>("Mask");
+
+		float oxygenMult = _mask?.OxygenRateMultiplier ?? 1.0f;
+		_oxygenDecreaseRate = _maxOxygen / (OxygenLasts * _ticksPerSecond) * oxygenMult;
 		_oxygenBar = GetNode<ProgressBar>("/root/Node2D/CanvasLayer/UserInterface/Oxygen");
 		
 		_healthDecreaseRate = _maxHealth / (HealthLasts * _ticksPerSecond);
@@ -75,7 +78,8 @@ public partial class Player : CharacterBody2D
 		Vector2 direction = Input.GetVector("left", "right", "up", "down");
 		if (direction != Vector2.Zero)
 		{
-			Velocity = direction.Normalized() * Speed;
+			float speedMult = _mask?.SpeedMultiplier ?? 1.0f;
+			Velocity = direction.Normalized() * Speed * speedMult;
 		}
 		else
 		{
@@ -87,16 +91,21 @@ public partial class Player : CharacterBody2D
 		if (Velocity.Length() > 0.1f)
 		{
 			float angle = Velocity.Angle();
-			_sprite.Frame = AngleToFrame(angle);
+			int frame = AngleToFrame(angle);
+			_sprite.Frame = frame;
+			_mask?.SetDirection(frame);
 			
 			// up and down
 			_bobTime += (float)delta * 15f;
-			_sprite.Offset = _originalOffset + new Vector2(0, Mathf.Sin(_bobTime) * 50f);
+			var offset = new Vector2(0, Mathf.Sin(_bobTime) * 50f);
+			_sprite.Offset = _originalOffset + offset;
+			_mask.MoveSprite(offset);
 		}
 		else
 		{
 			_bobTime = 0f;
 			_sprite.Offset = _originalOffset;
+			_mask.MoveSprite(Vector2.Zero);
 		}
 		
 		// oxygen decrease
