@@ -8,6 +8,8 @@ public partial class MapGenerator : Node
 	[Export]
 	public int Size { get; set; } = 20;
 	
+	private const int Variations = 2;
+	
 	public override void _Ready()
 	{
 		var terrainLayer = GetNode<TileMapLayer>("TerrainLayer");
@@ -15,8 +17,8 @@ public partial class MapGenerator : Node
 		var rng = new RandomNumberGenerator();
 		var map = new Map(rng, Size);
 		
-		var totalSize = new Vector2I(Size * Areas.Size, Size * Areas.Size);
-		var offset = -(totalSize / Areas.Size);
+		var totalSize = new Vector2I(map.Size * Areas.Size.X, map.Size * Areas.Size.Y);
+		var offset = -(totalSize / 2);
 		
 		map.Place((position, area) =>
 		{
@@ -31,34 +33,182 @@ public partial class MapGenerator : Node
 				Area.Ocean => Terrain.Water,
 				_ => Terrain.Grass
 			};
-			
-			for (var x = 0; x < Areas.Size; x++)
+
+			switch (area)
 			{
-				for (var y = 0; y < Areas.Size; y++)
+				case Area.Street:
+					PlaceStreet(position);
+					return;
+				
+				case Area.Grassland:
+					PlaceGrassland(position);
+					return;
+				
+				case Area.Wasteland:
+					PlaceWasteland(position);
+					return;
+				
+				case Area.Pond:
+					PlacePond(position);
+					return;
+				
+				case Area.Forest:
+					PlaceForest(position);
+					return;
+				
+				case Area.House:
+					PlaceHouse(position);
+					return;
+				
+				case Area.Ocean:
+					PlaceOcean(position);
+					return;
+			}
+			
+			for (var x = 0; x < Areas.Size.X; x++)
+			{
+				for (var y = 0; y < Areas.Size.Y; y++)
 				{
-					var tilePosition = new Vector2I(position.X * Areas.Size + x, position.Y * Areas.Size + y) + offset;
-					var randomOffset = rng.RandiRange(0, 1);
-					
-					var orthogonalPosition = new Vector2I(tilePosition.Y, tilePosition.X - totalSize.Y / 2);
-					terrainLayer.SetCell(orthogonalPosition, 0, new Vector2I(randomOffset, (int) terrain));
+					var tilePosition = new Vector2I(position.X * Areas.Size.X + x, position.Y * Areas.Size.Y + y) + offset;
+					SetCell(terrainLayer, tilePosition, terrain, rng);
 				}
 			}
 		});
 		
 		return;
-
+		
 		void PlaceStreet(Vector2I areaPosition)
 		{
-			for (var x = 0; x < Areas.Size; x++)
+			for (var x = 0; x < Areas.Size.X; x++)
 			{
-				for (var y = 0; y < Areas.Size; y++)
+				for (var y = 0; y < Areas.Size.Y; y++)
 				{
-					var tilePosition = new Vector2I(areaPosition.X * Areas.Size + x, areaPosition.Y * Areas.Size + y);
+					var tilePosition = new Vector2I(areaPosition.X * Areas.Size.X + x, areaPosition.Y * Areas.Size.Y + y) + offset;
 					
+					var isAtEdge = x == 0 || x == Areas.Size.X - 1 || y == 0 || y == Areas.Size.Y - 1;
+					var isAtCorner = (x == 0 || x == Areas.Size.X - 1) && (y == 0 || y == Areas.Size.Y - 1);
+
+					if (isAtEdge && !isAtCorner)
+					{
+						// Check if the area next to this edge is also a street
+						var adjacentAreaPosition = x is 0
+							? new Vector2I(areaPosition.X - 1, areaPosition.Y)
+							: x == Areas.Size.X - 1
+								? new Vector2I(areaPosition.X + 1, areaPosition.Y)
+								: y is 0
+									? new Vector2I(areaPosition.X, areaPosition.Y - 1)
+									: new Vector2I(areaPosition.X, areaPosition.Y + 1);
+						
+						if (map.GetArea(adjacentAreaPosition.X, adjacentAreaPosition.Y) == Area.Street)
+						{							
+							SetCell(terrainLayer, tilePosition, Terrain.Asphalt, rng);
+							
+							continue;
+						}
+					}
+					else if (!isAtEdge && !isAtCorner)
+					{
+						SetCell(terrainLayer, tilePosition, Terrain.Asphalt, rng);
+						
+						continue;
+					}
 					
+					SetCell(terrainLayer, tilePosition, Terrain.Grass, rng);
 				}
 			}
 		}
+		
+		void PlaceGrassland(Vector2I areaPosition)
+		{
+			for (var x = 0; x < Areas.Size.X; x++)
+			{
+				for (var y = 0; y < Areas.Size.Y; y++)
+				{
+					var tilePosition = new Vector2I(areaPosition.X * Areas.Size.X + x, areaPosition.Y * Areas.Size.Y + y) + offset;
+					SetCell(terrainLayer, tilePosition, Terrain.Grass, rng);
+				}
+			}
+		}
+		
+		void PlaceWasteland(Vector2I areaPosition)
+		{
+			for (var x = 0; x < Areas.Size.X; x++)
+			{
+				for (var y = 0; y < Areas.Size.Y; y++)
+				{
+					var tilePosition = new Vector2I(areaPosition.X * Areas.Size.X + x, areaPosition.Y * Areas.Size.Y + y) + offset;
+
+					var distanceFromCenter = new Vector2I(
+						Mathf.Abs(x - Areas.Size.X / 2),
+						Mathf.Abs(y - Areas.Size.Y / 2)
+					).Length();
+					
+					var maxDistance = new Vector2I(Areas.Size.X / 2, Areas.Size.Y / 2).Length();
+					
+					var sandChance = 1.0 - distanceFromCenter / maxDistance;
+
+					SetCell(terrainLayer, tilePosition, rng.Randf() < sandChance ? Terrain.Sand : Terrain.Grass, rng);
+				}
+			}
+		}
+		
+		void PlacePond(Vector2I areaPosition)
+		{
+			for (var x = 0; x < Areas.Size.X; x++)
+			{
+				for (var y = 0; y < Areas.Size.Y; y++)
+				{
+					var tilePosition = new Vector2I(areaPosition.X * Areas.Size.X + x, areaPosition.Y * Areas.Size.Y + y) + offset;
+					
+					var isAtEdge = x == 0 || x == Areas.Size.X - 1 || y == 0 || y == Areas.Size.Y - 1;
+					SetCell(terrainLayer, tilePosition, isAtEdge ? Terrain.Grass : Terrain.Water, rng);
+				}
+			}
+		}
+		
+		void PlaceForest(Vector2I areaPosition)
+		{
+			for (var x = 0; x < Areas.Size.X; x++)
+			{
+				for (var y = 0; y < Areas.Size.Y; y++)
+				{
+					var tilePosition = new Vector2I(areaPosition.X * Areas.Size.X + x, areaPosition.Y * Areas.Size.Y + y) + offset;
+					SetCell(terrainLayer, tilePosition, Terrain.Grass, rng);
+				}
+			}
+		}
+		
+		void PlaceHouse(Vector2I areaPosition)
+		{
+			for (var x = 0; x < Areas.Size.X; x++)
+			{
+				for (var y = 0; y < Areas.Size.Y; y++)
+				{
+					var tilePosition = new Vector2I(areaPosition.X * Areas.Size.X + x, areaPosition.Y * Areas.Size.Y + y) + offset;
+					
+					var isAtEdge = x == 0 || x == Areas.Size.X - 1 || y == 0 || y == Areas.Size.Y - 1;
+					SetCell(terrainLayer, tilePosition, isAtEdge ? Terrain.Grass : Terrain.House, rng);
+				}
+			}
+		}
+		
+		void PlaceOcean(Vector2I areaPosition)
+		{
+			for (var x = 0; x < Areas.Size.X; x++)
+			{
+				for (var y = 0; y < Areas.Size.Y; y++)
+				{
+					var tilePosition = new Vector2I(areaPosition.X * Areas.Size.X + x, areaPosition.Y * Areas.Size.Y + y) + offset;
+					SetCell(terrainLayer, tilePosition, Terrain.Water, rng);
+				}
+			}
+		}
+	}
+	
+	private void SetCell(TileMapLayer layer, Vector2I position, Terrain terrain, RandomNumberGenerator rng)
+	{
+		var randomOffset = rng.RandiRange(0, Variations - 1);
+		layer.SetCell(position, 0, new Vector2I(randomOffset, (int) terrain));
 	}
 	
 	public override void _Process(double delta)
