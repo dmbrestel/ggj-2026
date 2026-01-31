@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dfh2ef3d3qats" path="res://scripts/MapGenerator.cs" id="1_bl13t"]
 [ext_resource type="Texture2D" uid="uid://crrxrgwqe70m3" path="res://art/tileset4.png" id="2_iyx0m"]
-[ext_resource type="PackedScene" uid="uid://dm6qoe57l87ub" path="res://scenes/player.tscn" id="3_iyx0m"]
-[ext_resource type="PackedScene" uid="uid://c5e7ljd2a57s4" path="res://scenes/user_interface.tscn" id="4_74lek"]
+[ext_resource type="PackedScene" uid="uid://bq103t0tacq1r" path="res://scenes/player.tscn" id="3_iyx0m"]
+[ext_resource type="PackedScene" path="res://scenes/user_interface.tscn" id="4_74lek"]
 [ext_resource type="Texture2D" uid="uid://v3pq81wu4w4q" path="res://art/tree.png" id="4_at5dv"]
-[ext_resource type="PackedScene" uid="uid://c5p5nvipbxnoj" path="res://scenes/ammunition.tscn" id="5_j5jx5"]
+[ext_resource type="PackedScene" path="res://scenes/ammunition.tscn" id="5_j5jx5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bl13t"]
 texture = ExtResource("2_iyx0m")
@@ -59,7 +59,6 @@ tile_set = SubResource("TileSet_ij1v8")
 Speed = 600.0
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=415095711]
-zoom = Vector2(0.75, 0.75)
 
 [node name="Ammunition" parent="." unique_id=1635025102 instance=ExtResource("5_j5jx5")]
 position = Vector2(479, -236)
