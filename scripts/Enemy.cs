@@ -92,4 +92,12 @@ public partial class Enemy : CharacterBody2D
 		int index = (int)Mathf.Round(degrees / 45f) % 8;
 		return frameMap[index];
 	}
+
+	public void TakeDamage()
+	{
+		_health -= 1f;
+		
+		GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
+		QueueFree();
+	}
 }

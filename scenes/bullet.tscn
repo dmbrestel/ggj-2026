@@ -14,7 +14,8 @@ width = 53
 height = 9
 
 [node name="Bullet" type="Area2D" unique_id=815471038]
-collision_mask = 2
+collision_layer = 8
+collision_mask = 7
 script = ExtResource("1_y25gk")
 Speed = 1600.0
 

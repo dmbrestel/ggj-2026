@@ -213,4 +213,9 @@ public partial class Player : CharacterBody2D
 	}
 	
 	public Boolean IsHealthSomewhatFull => _health > _maxHealth * 0.99f;
+
+	public void TakeDamage()
+	{
+		_health -= 0.3f;
+	}
 }
