@@ -242,11 +242,11 @@ public partial class MapGenerator : Node
 					var inside = x > 1 && x < Areas.Size.X - 2 && y > 1 && y < Areas.Size.Y - 2;
 					if (!inside) continue;
 					
-					if (rng.RandiRange(0, 100) < 8)
+					if (rng.RandiRange(0, 100) < 15)
 					{
 						PlaceObject(objectLayer, Ammunition, tilePosition);
 					}
-					else if (rng.RandiRange(0, 100) < 8)
+					else if (rng.RandiRange(0, 100) < 4)
 					{
 						PlaceObject(objectLayer, Oxygen, tilePosition);
 					}
