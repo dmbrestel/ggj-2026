@@ -15,5 +15,5 @@ public enum Area
 
 public static class Areas
 {
-    public static readonly Vector2I Size = new(9, 9);
+    public static readonly Vector2I Size = new(7, 7);
 }

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://tx7tssvbd8x0" path="res://scripts/Weapon.cs" id="1_xasec"]
 [ext_resource type="PackedScene" uid="uid://pyr4252sajfk" path="res://scenes/bullet.tscn" id="2_bmw2d"]
 [ext_resource type="Texture2D" uid="uid://bwoah757v3vdv" path="res://art/gun.png" id="3_bmw2d"]
+[ext_resource type="Texture2D" uid="uid://7ngpjh60g8hk" path="res://art/tourch_texture_4_copy.png" id="4_8fp1k"]
 
 [node name="Weapon" type="Node2D" unique_id=1725967702]
 script = ExtResource("1_xasec")
@@ -14,3 +15,9 @@ texture = ExtResource("3_bmw2d")
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=1300405591]
 position = Vector2(1197, -299)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=710739664]
+position = Vector2(6319, -321)
+rotation = 1.5616457
+scale = Vector2(10, 10)
+texture = ExtResource("4_8fp1k")
