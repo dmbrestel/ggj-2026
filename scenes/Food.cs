@@ -5,7 +5,7 @@ namespace GGJ2026.scenes;
 
 public partial class Food : Area2D
 {
-	[Export] public float extraHealth = 0.25f;
+	[Export] public float ExtraHealth = 0.25f;
 	
 	public override void _Ready()
 	{
@@ -16,7 +16,7 @@ public partial class Food : Area2D
 	{
 		if (body is not Player player || player.IsHealthSomewhatFull) return;
 		
-		player.AddHealth(extraHealth);
+		player.AddHealth(ExtraHealth);
 		QueueFree();
 	}
 }
