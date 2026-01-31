@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using GGJ2026.scripts.terrain;
 using Godot;
 
@@ -6,7 +7,13 @@ namespace GGJ2026.scripts;
 public partial class MapGenerator : Node
 {
 	[Export]
-	public int Size { get; set; } = 20;
+	public int Size { get; set; } = 50;
+	
+	[Export]
+	public PackedScene Ammunition { get; set; }
+	
+	[Export]
+	public  PackedScene Egg { get; set; }
 	
 	private const int Variations = 2;
 	
@@ -164,10 +171,12 @@ public partial class MapGenerator : Node
 					var tilePosition = new Vector2I(areaPosition.X * Areas.Size.X + x, areaPosition.Y * Areas.Size.Y + y) + offset;
 					SetCell(terrainLayer, tilePosition, Terrain.Grass, rng);
 					
+					List<int> treeIDs = [1, 14, 15, 16];
+					
 					// Place trees randomly
 					if (rng.RandiRange(0, 100) < 30) // 30% chance to place a tree
 					{
-						SetCell(objectLayer, tilePosition, 1);
+						SetCell(objectLayer, tilePosition, treeIDs[rng.RandiRange(0, treeIDs.Count - 1)]);
 					}
 				}
 			}
@@ -224,7 +233,19 @@ public partial class MapGenerator : Node
 						else if (wy == 0) objectId = 8;
 						else if (wy == my) objectId = 3;
 						
-						SetCell(objectLayer, tilePosition, objectId);
+						SetCell(objectLayer, tilePosition - new Vector2I(0, 1), objectId);
+					}
+					
+					var inside = x > 1 && x < Areas.Size.X - 2 && y > 1 && y < Areas.Size.Y - 2;
+					if (!inside) continue;
+					
+					if (rng.RandiRange(0, 100) < 10)
+					{
+						PlaceObject(objectLayer, Ammunition, tilePosition);
+					}
+					else if (rng.RandiRange(0, 100) < 1)
+					{
+						PlaceObject(objectLayer, Egg, tilePosition);
 					}
 				}
 			}
@@ -252,6 +273,13 @@ public partial class MapGenerator : Node
 	private void SetCell(TileMapLayer layer, Vector2I position, int id)
 	{
 		layer.SetCell(position, id, new Vector2I(0, 0));
+	}
+	
+	private void PlaceObject(TileMapLayer layer, PackedScene scene, Vector2I cell)
+	{
+		var instance = scene.Instantiate<Node2D>();
+		GetParent().CallDeferred("add_child", instance);
+		instance.Position = layer.MapToLocal(cell - new Vector2I(0, 1)) + layer.Position;
 	}
 	
 	public override void _Process(double delta)

@@ -1,11 +1,8 @@
 using Godot;
+using System;
 
-namespace GGJ2026.scripts;
-
-public partial class Ammunition : Area2D
+public partial class Egg : Area2D
 {
-    [Export] public int AmmoAmount = 12;
-
     public override void _Ready()
     {
         BodyEntered += OnBodyEntered;
@@ -15,7 +12,7 @@ public partial class Ammunition : Area2D
     {
         if (body is Player player)
         {
-            player.AddAmmo(AmmoAmount);
+            player.AddEgg();
             QueueFree();
         }
     }

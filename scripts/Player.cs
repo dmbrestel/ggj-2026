@@ -122,4 +122,15 @@ public partial class Player : CharacterBody2D
 		int index = (int)Mathf.Round(degrees / 45f) % 8;
 		return frameMap[index];
 	}
+
+	public static int EggCount = 0;
+	
+	public void AddEgg()
+	{
+		EggCount++;
+		
+		EggCountChanged?.Invoke();
+	}
+	
+	public static event Action EggCountChanged;
 }
