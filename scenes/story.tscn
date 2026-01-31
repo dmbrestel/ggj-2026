@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dgvrqa84saodc"]
+
+[ext_resource type="Script" uid="uid://d3fu7cl5b7uds" path="res://scenes/Food.cs" id="1_1octt"]
+[ext_resource type="Texture2D" uid="uid://wwkft6jv365j" path="res://art/tileset.png" id="2_1octt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qs44n"]
+size = Vector2(13, 14)
+
+[node name="Story" type="Area2D" unique_id=1635025102]
+script = ExtResource("1_1octt")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2064148226]
+position = Vector2(1, -2)
+scale = Vector2(0.059750006, 0.059750006)
+texture = ExtResource("2_1octt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=907807318]
+position = Vector2(0.5, -2)
+shape = SubResource("RectangleShape2D_qs44n")
