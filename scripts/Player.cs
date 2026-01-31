@@ -31,6 +31,8 @@ public partial class Player : CharacterBody2D
 
 	private int _ticksPerSecond = Engine.PhysicsTicksPerSecond;
 	
+	private CanvasLayer _canvasLayer;
+	
 
 	public override void _Ready()
 	{
@@ -47,6 +49,8 @@ public partial class Player : CharacterBody2D
 		
 		_sprite =  GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		_originalOffset = _sprite.Offset;
+		
+		_canvasLayer = GetNode<CanvasLayer>("/root/Node2D/CanvasLayer");
 	}
 
 	public override void _Input(InputEvent @event)
@@ -110,8 +114,8 @@ public partial class Player : CharacterBody2D
 		if (_health <= 0f)
 		{
 			GetTree().Paused = true;
-			var endScreen = EndScreenScene.Instantiate<EndScreen>();
-			GetTree().Root.AddChild(endScreen);
+			var endScreen = EndScreenScene.Instantiate<GGJ2026.scenes.EndScreen>();
+			_canvasLayer.CallDeferred("add_child", endScreen);
 			endScreen.SetValues(Timer.GameTime, EggCount);
 		}
 		

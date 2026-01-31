@@ -9,6 +9,7 @@ font_size = 383
 font_size = 72
 
 [node name="Control" type="Control" unique_id=1819202073 node_paths=PackedStringArray("StuffLabel")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,10 +30,19 @@ vertical_alignment = 1
 
 [node name="Timer" type="Label" parent="." unique_id=1562952512]
 layout_mode = 0
-offset_top = -44.0
 offset_right = 1920.0
-offset_bottom = 885.0
+offset_bottom = 929.0
 text = "BLA BLA BLA"
 label_settings = SubResource("LabelSettings_dt0yg")
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="Button" type="Button" parent="." unique_id=266843841]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 929.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "TRY AGAIN"

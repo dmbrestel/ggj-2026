@@ -1,5 +1,7 @@
 using Godot;
 
+namespace GGJ2026.scenes;
+
 public partial class EndScreen : Control
 {
 	[Export] public Label StuffLabel;
@@ -8,6 +10,14 @@ public partial class EndScreen : Control
 	{
 		var eggText = eggs > 0 ? $" and you collected {eggs} eggs!" : "!";
 		StuffLabel.Text = $"You survived for {time}{eggText}";
+		
+		GetNode<Button>("Button").Pressed += () =>
+		{
+			GetTree().Paused = false;
+			GetTree().ReloadCurrentScene();
+
+			Player.EggCount = 0;
+		};
 	}
 	
 	public override void _Ready()
