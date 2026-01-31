@@ -71,6 +71,15 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(128, 129)
 
+[sub_resource type="Gradient" id="Gradient_qhqgy"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dqkch"]
+gradient = SubResource("Gradient_qhqgy")
+fill = 1
+fill_from = Vector2(0.5021834, 0.4978166)
+fill_to = Vector2(0.88646287, 0.8558952)
+
 [node name="Player" type="CharacterBody2D" unique_id=2029222254]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_g2els")
@@ -90,3 +99,7 @@ shape = SubResource("RectangleShape2D_g2els")
 [node name="Weapon" parent="." unique_id=1725967702 instance=ExtResource("3_qhqgy")]
 position = Vector2(41, -1)
 scale = Vector2(0.1, 0.1)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1832647018]
+texture = SubResource("GradientTexture2D_dqkch")
+texture_scale = 8.07

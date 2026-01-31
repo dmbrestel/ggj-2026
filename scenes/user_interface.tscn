@@ -50,11 +50,18 @@ max_value = 1.0
 value = 1.0
 
 [node name="Ammunition" type="Label" parent="." unique_id=896747595]
-layout_mode = 0
-offset_left = 963.0
-offset_top = 600.0
-offset_right = 1042.0
-offset_bottom = 642.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -186.0
+offset_top = -52.0
+offset_right = -107.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
 scale = Vector2(1, 1.0060133)
 theme_override_font_sizes/font_size = 30
 text = "6 / 12"
