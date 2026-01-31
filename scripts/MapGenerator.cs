@@ -7,7 +7,10 @@ namespace GGJ2026.scripts;
 public partial class MapGenerator : Node
 {
 	[Export]
-	public int Size { get; set; } = 20;
+	public int Size { get; set; } = 50;
+	
+	[Export]
+	public PackedScene Ammunition { get; set; }
 	
 	private const int Variations = 2;
 	
@@ -229,6 +232,15 @@ public partial class MapGenerator : Node
 						
 						SetCell(objectLayer, tilePosition - new Vector2I(0, 1), objectId);
 					}
+					
+					var inside = x > 1 && x < Areas.Size.X - 2 && y > 1 && y < Areas.Size.Y - 2;
+					if (inside)
+					{
+						if (rng.RandiRange(0, 100) < 10)
+						{
+							PlaceObject(objectLayer, Ammunition, tilePosition);
+						}
+					}
 				}
 			}
 		}
@@ -255,6 +267,13 @@ public partial class MapGenerator : Node
 	private void SetCell(TileMapLayer layer, Vector2I position, int id)
 	{
 		layer.SetCell(position, id, new Vector2I(0, 0));
+	}
+	
+	private void PlaceObject(TileMapLayer layer, PackedScene scene, Vector2I cell)
+	{
+		var instance = scene.Instantiate<Node2D>();
+		GetParent().CallDeferred("add_child", instance);
+		instance.Position = layer.MapToLocal(cell - new Vector2I(0, 1)) + layer.Position;
 	}
 	
 	public override void _Process(double delta)

@@ -136,6 +136,7 @@ color = Color(0.16924527, 0.1692453, 0.16924527, 1)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1088554373]
 script = ExtResource("1_bl13t")
+Ammunition = ExtResource("5_j5jx5")
 
 [node name="TerrainLayer" type="TileMapLayer" parent="Node2D" unique_id=1573595366]
 tile_set = SubResource("TileSet_ij1v8")
