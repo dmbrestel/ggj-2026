@@ -19,8 +19,8 @@ animations = [{
 size = Vector2(128, 129)
 
 [node name="Player" type="CharacterBody2D" unique_id=2029222254]
-position = Vector2(0, 1)
 script = ExtResource("1_g2els")
+OxygenLasts = 60.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1362948367]
 position = Vector2(-1, 0)

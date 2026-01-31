@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://c5e7ljd2a57s4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8tnmo"]
+bg_color = Color(0.30743265, 0.62879163, 0.8780245, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_syvep"]
+bg_color = Color(0.9141724, 0.43747377, 0.33958364, 1)
+
+[node name="UserInterface" type="Control" unique_id=73815526]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Oxygen" type="ProgressBar" parent="." unique_id=249329894]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -114.0
+offset_right = -14.0
+offset_bottom = -14.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_8tnmo")
+max_value = 1.0
+value = 1.0
+fill_mode = 3
+
+[node name="Health" type="ProgressBar" parent="." unique_id=1238085439]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -91.0
+offset_top = -114.0
+offset_right = -61.0
+offset_bottom = -14.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_syvep")
+max_value = 1.0
+value = 1.0
+
+[node name="Ammunition" type="Label" parent="." unique_id=896747595]
+layout_mode = 0
+offset_left = 963.0
+offset_top = 600.0
+offset_right = 1042.0
+offset_bottom = 642.0
+scale = Vector2(1, 1.0060133)
+theme_override_font_sizes/font_size = 30
+text = "6 / 12"
