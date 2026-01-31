@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" path="res://scenes/player.tscn" id="3_iyx0m"]
 [ext_resource type="PackedScene" path="res://scenes/user_interface.tscn" id="4_74lek"]
 [ext_resource type="PackedScene" path="res://scenes/ammunition.tscn" id="5_j5jx5"]
+[ext_resource type="Texture2D" uid="uid://7ngpjh60g8hk" path="res://art/tourch_texture_4_copy.png" id="5_lpvoh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bl13t"]
 texture = ExtResource("2_iyx0m")
@@ -18,15 +19,25 @@ texture_region_size = Vector2i(256, 128)
 1:3/0 = 0
 0:3/0 = 0
 0:4/0 = 0
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, 0, 0, -64, 128, 0)
 1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -64, 128, 0, -128, 0)
 
 [sub_resource type="TileSet" id="TileSet_ij1v8"]
 tile_shape = 1
 tile_layout = 4
 tile_size = Vector2i(256, 128)
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_bl13t")
 
 [node name="Node2D" type="Node2D" unique_id=1771555354]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=245494821]
+
+[node name="UserInterface" parent="CanvasLayer" unique_id=73815526 instance=ExtResource("4_74lek")]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=886564131]
+color = Color(0.24840015, 0.24840018, 0.24840015, 1)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1088554373]
 script = ExtResource("1_bl13t")
@@ -40,9 +51,8 @@ Speed = 600.0
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=415095711]
 zoom = Vector2(0.25, 0.25)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=245494821]
-
-[node name="UserInterface" parent="CanvasLayer" unique_id=73815526 instance=ExtResource("4_74lek")]
+[node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=559958329]
+texture = ExtResource("5_lpvoh")
 
 [node name="Ammunition" parent="." unique_id=1635025102 instance=ExtResource("5_j5jx5")]
 position = Vector2(479, -236)
