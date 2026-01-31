@@ -1,16 +1,17 @@
 [gd_scene format=3 uid="uid://bsgfe5r7jnoje"]
 
 [ext_resource type="Script" uid="uid://dfh2ef3d3qats" path="res://scripts/MapGenerator.cs" id="1_bl13t"]
+[ext_resource type="Script" uid="uid://cyuyu1c615pq0" path="res://scripts/Enemies.cs" id="1_si7kk"]
 [ext_resource type="Texture2D" uid="uid://crrxrgwqe70m3" path="res://art/tileset4.png" id="2_iyx0m"]
 [ext_resource type="PackedScene" uid="uid://bq103t0tacq1r" path="res://scenes/player.tscn" id="3_iyx0m"]
 [ext_resource type="PackedScene" uid="uid://c5e7ljd2a57s4" path="res://scenes/user_interface.tscn" id="4_74lek"]
 [ext_resource type="Texture2D" uid="uid://v3pq81wu4w4q" path="res://art/tree.png" id="4_at5dv"]
-[ext_resource type="PackedScene" path="res://scenes/egg.tscn" id="4_xrtyr"]
-[ext_resource type="PackedScene" path="res://scenes/oxygen.tscn" id="5_c6rvn"]
+[ext_resource type="PackedScene" uid="uid://0vf4s0ilt3u1" path="res://scenes/egg.tscn" id="4_xrtyr"]
+[ext_resource type="PackedScene" uid="uid://d33lbahdea74b" path="res://scenes/oxygen.tscn" id="5_c6rvn"]
 [ext_resource type="Texture2D" uid="uid://d2ve4osi431l8" path="res://art/wall_1.png" id="5_ghpyy"]
 [ext_resource type="PackedScene" uid="uid://5lyxx6a4ylil" path="res://scenes/ammunition.tscn" id="5_j5jx5"]
 [ext_resource type="Texture2D" uid="uid://bgnjatlf5vpn0" path="res://art/wall_2.png" id="6_44saj"]
-[ext_resource type="PackedScene" path="res://scenes/food.tscn" id="6_n74k2"]
+[ext_resource type="PackedScene" uid="uid://dasrov44quwvu" path="res://scenes/food.tscn" id="6_n74k2"]
 [ext_resource type="Texture2D" uid="uid://daglt06d7xtdv" path="res://art/wall_corner_1.png" id="7_7mbro"]
 [ext_resource type="Texture2D" uid="uid://btktkbn47vcay" path="res://art/wall_corner_2.png" id="8_ff6ho"]
 [ext_resource type="Texture2D" uid="uid://bjoxwe7dxi3ek" path="res://art/tree2.png" id="9_5jxlq"]
@@ -134,6 +135,13 @@ sources/16 = SubResource("TileSetAtlasSource_j7bvy")
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=886564131]
 color = Color(0.16924527, 0.1692453, 0.16924527, 1)
 
+[node name="Enemies" type="Node2D" parent="." unique_id=1394631108]
+script = ExtResource("1_si7kk")
+Military = ExtResource("19_daiq8")
+Cultist = ExtResource("19_daiq8")
+Hoarders = ExtResource("19_daiq8")
+Robot = ExtResource("19_daiq8")
+
 [node name="Node2D" type="Node2D" parent="." unique_id=1088554373]
 script = ExtResource("1_bl13t")
 Ammunition = ExtResource("5_j5jx5")
@@ -156,5 +164,3 @@ Speed = 600.0
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=245494821]
 
 [node name="UserInterface" parent="CanvasLayer" unique_id=73815526 instance=ExtResource("4_74lek")]
-
-[node name="enemy" parent="." unique_id=1896470558 instance=ExtResource("19_daiq8")]
