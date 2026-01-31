@@ -48,3 +48,13 @@ grow_vertical = 0
 theme_override_styles/fill = SubResource("StyleBoxFlat_syvep")
 max_value = 1.0
 value = 1.0
+
+[node name="Ammunition" type="Label" parent="." unique_id=896747595]
+layout_mode = 0
+offset_left = 963.0
+offset_top = 600.0
+offset_right = 1042.0
+offset_bottom = 642.0
+scale = Vector2(1, 1.0060133)
+theme_override_font_sizes/font_size = 30
+text = "6 / 12"
