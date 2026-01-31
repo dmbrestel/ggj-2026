@@ -5,7 +5,7 @@ public partial class Weapon_Enemy : Node2D
 {
 
 	[Export] public PackedScene Bullet;
-	public float FireRate = 0.2f;
+	public float FireRate = 0.7f;
 	public Node2D PlayerNode;
 
 	private Node2D _owner;
@@ -15,6 +15,8 @@ public partial class Weapon_Enemy : Node2D
 	private const int MagSize = 6;
 	public int AmmoInMag = 6;
 	public int Ammunition = 12; 
+	
+	private float _timeSinceLastShot = 0.0f;
 	
 	
 	
@@ -39,6 +41,7 @@ public partial class Weapon_Enemy : Node2D
 	public override void _Process(double delta)
 	{
 		LookAt(PlayerNode.GlobalPosition);
+		_timeSinceLastShot += (float)delta;
 
 		var sprite = GetNode<Sprite2D>("Sprite2D");
 		bool flipped = GetGlobalMousePosition().X < GlobalPosition.X;
@@ -48,10 +51,15 @@ public partial class Weapon_Enemy : Node2D
 
 	public void Shoot()
 	{
+		// Only shoot if the timer is stopped
+		if (_timeSinceLastShot < FireRate) return;
+		
 		var bullet = Bullet.Instantiate<Area2D>();
 		GetTree().CurrentScene.AddChild(bullet);
 		bullet.GlobalPosition = _muzzle.GlobalPosition;
 		bullet.Rotation = Rotation;
+
+		_timeSinceLastShot = 0;
 	}
 	
 	
