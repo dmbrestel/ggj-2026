@@ -13,6 +13,7 @@ public partial class MapGenerator : Node
 	public override void _Ready()
 	{
 		var terrainLayer = GetNode<TileMapLayer>("TerrainLayer");
+		var objectLayer = GetNode<TileMapLayer>("ObjectLayer");
 		
 		var rng = new RandomNumberGenerator();
 		var map = new Map(rng, Size);
@@ -174,6 +175,12 @@ public partial class MapGenerator : Node
 				{
 					var tilePosition = new Vector2I(areaPosition.X * Areas.Size.X + x, areaPosition.Y * Areas.Size.Y + y) + offset;
 					SetCell(terrainLayer, tilePosition, Terrain.Grass, rng);
+					
+					// Place trees randomly
+					if (rng.RandiRange(0, 100) < 30) // 30% chance to place a tree
+					{
+						SetCell(objectLayer, tilePosition, 1);
+					}
 				}
 			}
 		}
@@ -209,6 +216,11 @@ public partial class MapGenerator : Node
 	{
 		var randomOffset = rng.RandiRange(0, Variations - 1);
 		layer.SetCell(position, 0, new Vector2I(randomOffset, (int) terrain));
+	}
+
+	private void SetCell(TileMapLayer layer, Vector2I position, int id)
+	{
+		layer.SetCell(position, id);
 	}
 	
 	public override void _Process(double delta)
