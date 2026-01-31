@@ -11,7 +11,13 @@ public partial class Player : CharacterBody2D
 	private ProgressBar _oxygenBar;
 	private ProgressBar _healthBar;
 	private Label _ammoLabel;
+	private AnimatedSprite2D _sprite;
 	
+	// movement animation
+	private float _bobTime = 0f;
+	private Vector2 _originalOffset;
+	
+	// ressources
 	private float _oxygen = 1.0f;
 	private float _maxOxygen = 1.0f;
 	private float _oxygenDecreaseRate;
@@ -33,6 +39,9 @@ public partial class Player : CharacterBody2D
 		_healthBar = GetNode<ProgressBar>("/root/Node2D/CanvasLayer/UserInterface/Health");
 		
 		_ammoLabel = GetNode<Label>("/root/Node2D/CanvasLayer/UserInterface/Ammunition");
+		
+		_sprite =  GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		_originalOffset = _sprite.Offset;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -63,6 +72,22 @@ public partial class Player : CharacterBody2D
 		}
 		MoveAndSlide();
 		
+		// movement animation
+		if (Velocity.Length() > 0.1f)
+		{
+			float angle = Velocity.Angle();
+			_sprite.Frame = AngleToFrame(angle);
+			
+			// up and down
+			_bobTime += (float)delta * 10f;
+			_sprite.Offset = _originalOffset + new Vector2(0, Mathf.Sin(_bobTime) * 2f);
+		}
+		else
+		{
+			_bobTime = 0f;
+			_sprite.Offset = _originalOffset;
+		}
+		
 		// oxygen decrease
 		_oxygen -= _oxygenDecreaseRate;
 		_oxygenBar.SetValue(_oxygen);
@@ -76,5 +101,16 @@ public partial class Player : CharacterBody2D
 	{
 		_weapon.Ammunition += ammo;
 		_ammoLabel.SetText($"{_weapon.AmmoInMag} / {_weapon.Ammunition}");
+	}
+
+	private int AngleToFrame(float angle)
+	{
+		float degrees = Mathf.RadToDeg(angle);
+		if (degrees < 0) degrees += 360f;
+
+		int[] frameMap = { 4, 3, 7, 2, 5, 0, 6, 1 }; // right, down-right, down, down-left, left, up-left, up, up-right
+
+		int index = (int)Mathf.Round(degrees / 45f) % 8;
+		return frameMap[index];
 	}
 }
