@@ -196,4 +196,15 @@ public partial class Player : CharacterBody2D
 	{
 		if (OxygenCarried < 3) OxygenCarried++;
 	}
+
+	public void AddHealth(float extraHealth)
+	{
+		_health += _maxHealth * extraHealth;
+		if (_health > _maxHealth)
+		{
+			_health = _maxHealth;
+		}
+	}
+	
+	public Boolean IsHealthSomewhatFull => _health > _maxHealth * 0.9f;
 }

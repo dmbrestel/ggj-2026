@@ -29,6 +29,10 @@ window/size/resizable=false
 
 project/assembly_name="GGJ2026"
 
+[global_group]
+
+Player=""
+
 [input]
 
 right={
