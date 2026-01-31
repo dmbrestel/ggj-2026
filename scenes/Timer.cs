@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace GGJ2026.scenes;
+
 public partial class Timer : Label
 {
 	private double _timeElapsed;
@@ -13,7 +15,11 @@ public partial class Timer : Label
 	public override void _Process(double delta)
 	{
 		_timeElapsed += delta;
+
+		GameTime = TimeSpan.FromSeconds(_timeElapsed).ToString(@"mm\:ss\:ff");
 		
-		Text = TimeSpan.FromSeconds(_timeElapsed).ToString(@"mm\:ss\:ff");
+		Text = GameTime;
 	}
+	
+	public static string GameTime { get; private set; }
 }

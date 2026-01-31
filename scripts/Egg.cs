@@ -10,7 +10,7 @@ public partial class Egg : Area2D
 
     private void OnBodyEntered(Node2D body)
     {
-        if (body is Player player)
+        if (body is GGJ2026.scripts.Player player)
         {
             player.AddEgg();
             QueueFree();

@@ -51,6 +51,7 @@ grow_vertical = 0
 theme_override_styles/fill = SubResource("StyleBoxFlat_syvep")
 max_value = 1.0
 value = 1.0
+fill_mode = 3
 
 [node name="Ammunition" type="Label" parent="." unique_id=896747595]
 layout_mode = 1

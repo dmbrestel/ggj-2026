@@ -5,9 +5,9 @@ public partial class EggCounter : Label
 {
 	public override void _Ready()
 	{
-		Player.EggCountChanged += () =>
+		GGJ2026.scripts.Player.EggCountChanged += () =>
 		{
-			Text = $"Eggs: {Player.EggCount}";
+			Text = $"Eggs: {GGJ2026.scripts.Player.EggCount}";
 		};
 	}
 	
