@@ -192,9 +192,15 @@ public partial class Player : CharacterBody2D
 	
 	public static event Action EggCountChanged;
 
-	public void AddOxygen()
+	public bool AddOxygen()
 	{
-		if (OxygenCarried < 3) OxygenCarried++;
+		if (OxygenCarried < 3)
+		{
+			OxygenCarried++;
+			return true;
+		}
+
+		return false;
 	}
 
 	public void AddHealth(float extraHealth)
@@ -206,5 +212,5 @@ public partial class Player : CharacterBody2D
 		}
 	}
 	
-	public Boolean IsHealthSomewhatFull => _health > _maxHealth * 0.9f;
+	public Boolean IsHealthSomewhatFull => _health > _maxHealth * 0.99f;
 }
