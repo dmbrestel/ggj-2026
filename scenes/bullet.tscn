@@ -19,7 +19,8 @@ script = ExtResource("1_y25gk")
 Speed = 1600.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=204933701]
-rotation = 1.5707964
+position = Vector2(-8, 0)
+scale = Vector2(0.84, 1)
 texture = ExtResource("2_l5glv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=582527656]

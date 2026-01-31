@@ -10,7 +10,7 @@ public partial class Bullet : Area2D
 	{
 		BodyEntered += OnBodyEntered;
 		// despawn
-		GetTree().CreateTimer(DespawnAfter).Timeout += () => QueueFree();
+		GetTree().CreateTimer(DespawnAfter).Timeout += QueueFree;
 	}
 	
 	public override void _PhysicsProcess(double delta)
