@@ -10,10 +10,14 @@ public class Map
     private readonly int _innerSize;
     private readonly int _totalSize;
     
+    private const int Expansion = 5;
+    
+    public int Size => _totalSize;
+    
     public Map(RandomNumberGenerator rng, int size)
     {
         _innerSize = size;
-        _totalSize = size + 2;
+        _totalSize = size + Expansion * 2;
         _areas = new Area[_totalSize, _totalSize];
         
         InitializeDefaultAreas(rng);
@@ -39,9 +43,9 @@ public class Map
             }
         }
         
-        for (var x = 1; x <= _innerSize; x++)
+        for (var x = Expansion; x < _innerSize + Expansion; x++)
         {
-            for (var y = 1; y <= _innerSize; y++)
+            for (var y = Expansion; y < _innerSize + Expansion; y++)
             {
                 var roll = rng.RandiRange(0, 100);
                 _areas[x, y] = roll switch
@@ -57,28 +61,34 @@ public class Map
     private void GenerateStreets(RandomNumberGenerator rng, HashSet<int> streetRows, HashSet<int> streetColumns)
     {
         var maxLines = Math.Max(1, _innerSize / 6);
-        var horizontalCount = rng.RandiRange(1, Math.Max(1, maxLines));
-        var verticalCount = rng.RandiRange(1, Math.Max(1, maxLines));
+        var horizontalCount = rng.RandiRange(3, Math.Max(1, maxLines));
+        var verticalCount = rng.RandiRange(3, Math.Max(1, maxLines));
         
         while (streetRows.Count < horizontalCount)
         {
-            streetRows.Add(rng.RandiRange(1, _innerSize));
+            var row = rng.RandiRange(Expansion, _innerSize + Expansion - 1);
+            if (streetRows.Contains(row + 1) || streetRows.Contains(row - 1))
+                continue;
+            streetRows.Add(row);
         }
         
         while (streetColumns.Count < verticalCount)
         {
-            streetColumns.Add(rng.RandiRange(1, _innerSize));
+            var column = rng.RandiRange(Expansion, _innerSize + Expansion - 1);
+            if (streetColumns.Contains(column + 1) || streetColumns.Contains(column - 1))
+                continue;
+            streetColumns.Add(column);
         }
         
         foreach (var row in streetRows)
         {
-            for (var column = 1; column <= _innerSize; column++)
+            for (var column = Expansion; column < _innerSize + Expansion; column++)
                 _areas[row, column] = Area.Street;
         }
 
         foreach (var column in streetColumns)
         {
-            for (var row = 1; row <= _innerSize; row++)
+            for (var row = Expansion; row < _innerSize + Expansion; row++)
                 _areas[row, column] = Area.Street;
         }
     }
@@ -86,14 +96,13 @@ public class Map
     private void PlaceHousesAtCrossings(RandomNumberGenerator rng, HashSet<int> streetRows, HashSet<int> streetColumns)
     {
         const int houseChancePercent = 70;
-
         foreach (var row in streetRows)
         {
             foreach (var column in streetColumns)
             {
                 foreach (var (nx, ny) in GetDiagonalNeighbors(row, column, _innerSize))
                 {
-                    if (_areas[nx, ny] != Area.Street && rng.RandiRange(0, 100) < houseChancePercent)
+                    if (_areas[nx, ny] != Area.Street && _areas[nx, ny] != Area.Ocean && rng.RandiRange(0, 100) < houseChancePercent)
                     {
                         _areas[nx, ny] = Area.House;
                     }
@@ -102,9 +111,9 @@ public class Map
         }
         
         const int roadsideHouseChance = 10;
-        for (var x = 1; x <= _innerSize; x++)
+        for (var x = Expansion; x < _innerSize + Expansion; x++)
         {
-            for (var y = 1; y <= _innerSize; y++)
+            for (var y = Expansion; y < _innerSize + Expansion; y++)
             {
                 if (_areas[x, y] != Area.Street) continue;
                 
@@ -122,13 +131,17 @@ public class Map
 
     private void DistributePonds(RandomNumberGenerator rng)
     {
-        const int pondChancePercent = 8;
-
-        for (var x = 1; x <= _innerSize; x++)
+        const int pondChancePercent = 4;
+        for (var x = Expansion; x < _innerSize + Expansion; x++)
         {
-            for (var y = 1; y <= _innerSize; y++)
+            for (var y = Expansion; y < _innerSize + Expansion; y++)
             {
                 if (_areas[x, y] == Area.Street || _areas[x, y] == Area.House)
+                    continue;
+                
+                var nextToOcean = x == Expansion || x == _innerSize + Expansion - 1 ||
+                                  y == Expansion || y == _innerSize + Expansion - 1;
+                if (nextToOcean)
                     continue;
 
                 if (rng.RandiRange(0, 100) < pondChancePercent)
