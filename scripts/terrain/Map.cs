@@ -50,7 +50,7 @@ public class Map
                 var roll = rng.RandiRange(0, 100);
                 _areas[x, y] = roll switch
                 {
-                    < 55 => Area.Forest,
+                    < 55 => Area.Grassland,
                     < 85 => Area.Wasteland,
                     _ => Area.Forest
                 };
