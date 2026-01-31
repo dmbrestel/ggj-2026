@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dfh2ef3d3qats" path="res://scripts/MapGenerator.cs" id="1_bl13t"]
 [ext_resource type="Texture2D" uid="uid://crrxrgwqe70m3" path="res://art/tileset4.png" id="2_iyx0m"]
-[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="3_iyx0m"]
+[ext_resource type="PackedScene" uid="uid://dm6qoe57l87ub" path="res://scenes/player.tscn" id="3_iyx0m"]
+[ext_resource type="PackedScene" uid="uid://c5e7ljd2a57s4" path="res://scenes/user_interface.tscn" id="4_74lek"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bl13t"]
 texture = ExtResource("2_iyx0m")
@@ -34,3 +35,7 @@ tile_set = SubResource("TileSet_ij1v8")
 [node name="Player" parent="." unique_id=2029222254 instance=ExtResource("3_iyx0m")]
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=415095711]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=245494821]
+
+[node name="UserInterface" parent="CanvasLayer" unique_id=73815526 instance=ExtResource("4_74lek")]
