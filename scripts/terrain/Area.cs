@@ -1,3 +1,5 @@
+using Godot;
+
 namespace GGJ2026.scripts.terrain;
 
 public enum Area
@@ -13,5 +15,5 @@ public enum Area
 
 public static class Areas
 {
-    public static int Size => 10;
+    public static readonly Vector2I Size = new(9, 9);
 }

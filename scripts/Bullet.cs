@@ -3,7 +3,6 @@ using System;
 
 public partial class Bullet : Area2D
 {
-
 	[Export] public float Speed = 400f;
 
 	public override void _Ready()
