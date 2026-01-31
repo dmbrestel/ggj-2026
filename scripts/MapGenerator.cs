@@ -174,6 +174,12 @@ public partial class MapGenerator : Node
 					
 					var isAtEdge = x == 0 || x == Areas.Size.X - 1 || y == 0 || y == Areas.Size.Y - 1;
 					SetCell(terrainLayer, tilePosition, isAtEdge ? Terrain.Grass : Terrain.House, rng);
+
+					var isAtWall = x == 1 || x == Areas.Size.X - 2 || y == 1 || y == Areas.Size.Y - 2;
+					if (isAtWall)
+					{
+						var objectId = 0;
+					}
 				}
 			}
 		}

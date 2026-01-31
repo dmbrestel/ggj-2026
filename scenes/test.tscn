@@ -5,7 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://bq103t0tacq1r" path="res://scenes/player.tscn" id="3_iyx0m"]
 [ext_resource type="PackedScene" path="res://scenes/user_interface.tscn" id="4_74lek"]
 [ext_resource type="Texture2D" uid="uid://v3pq81wu4w4q" path="res://art/tree.png" id="4_at5dv"]
+[ext_resource type="Texture2D" uid="uid://d2ve4osi431l8" path="res://art/wall_1.png" id="5_ghpyy"]
 [ext_resource type="PackedScene" path="res://scenes/ammunition.tscn" id="5_j5jx5"]
+[ext_resource type="Texture2D" uid="uid://bgnjatlf5vpn0" path="res://art/wall_2.png" id="6_44saj"]
+[ext_resource type="Texture2D" uid="uid://daglt06d7xtdv" path="res://art/wall_corner_1.png" id="7_7mbro"]
+[ext_resource type="Texture2D" uid="uid://btktkbn47vcay" path="res://art/wall_corner_2.png" id="8_ff6ho"]
+[ext_resource type="Texture2D" uid="uid://by5y8yf8lyar6" path="res://art/wall_corner_3.png" id="9_7yos8"]
+[ext_resource type="Texture2D" uid="uid://c1swueb5afl2b" path="res://art/wall_corner_4.png" id="10_5jxlq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bl13t"]
 texture = ExtResource("2_iyx0m")
@@ -29,6 +35,36 @@ texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-14, -1, 0, 27, 13, 0, 0, -48)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xrtyr"]
+texture = ExtResource("5_ghpyy")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_daiq8"]
+texture = ExtResource("6_44saj")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c6rvn"]
+texture = ExtResource("7_7mbro")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n74k2"]
+texture = ExtResource("8_ff6ho")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_si7kk"]
+texture = ExtResource("9_7yos8")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pn65j"]
+texture = ExtResource("10_5jxlq")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_ij1v8"]
 tile_shape = 1
 tile_layout = 4
@@ -36,6 +72,12 @@ tile_size = Vector2i(256, 128)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_bl13t")
 sources/1 = SubResource("TileSetAtlasSource_jcd4p")
+sources/2 = SubResource("TileSetAtlasSource_xrtyr")
+sources/3 = SubResource("TileSetAtlasSource_daiq8")
+sources/4 = SubResource("TileSetAtlasSource_c6rvn")
+sources/5 = SubResource("TileSetAtlasSource_n74k2")
+sources/6 = SubResource("TileSetAtlasSource_si7kk")
+sources/7 = SubResource("TileSetAtlasSource_pn65j")
 
 [node name="Node2D" type="Node2D" unique_id=1771555354]
 
