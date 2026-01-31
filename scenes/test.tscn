@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bq103t0tacq1r" path="res://scenes/player.tscn" id="3_iyx0m"]
 [ext_resource type="PackedScene" uid="uid://c5e7ljd2a57s4" path="res://scenes/user_interface.tscn" id="4_74lek"]
 [ext_resource type="Texture2D" uid="uid://v3pq81wu4w4q" path="res://art/tree.png" id="4_at5dv"]
-[ext_resource type="PackedScene" uid="uid://0vf4s0ilt3u1" path="res://scenes/egg.tscn" id="4_xrtyr"]
+[ext_resource type="PackedScene" path="res://scenes/egg.tscn" id="4_xrtyr"]
 [ext_resource type="Texture2D" uid="uid://d2ve4osi431l8" path="res://art/wall_1.png" id="5_ghpyy"]
 [ext_resource type="PackedScene" uid="uid://5lyxx6a4ylil" path="res://scenes/ammunition.tscn" id="5_j5jx5"]
 [ext_resource type="Texture2D" uid="uid://bgnjatlf5vpn0" path="res://art/wall_2.png" id="6_44saj"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://brnnup45m2ik" path="res://art/wall_3.png" id="11_7mbro"]
 [ext_resource type="Texture2D" uid="uid://bweqhirfa4c3j" path="res://art/tree4.png" id="11_daiq8"]
 [ext_resource type="Texture2D" uid="uid://cfd7v0wjrjct5" path="res://art/wall_4.png" id="12_ff6ho"]
+[ext_resource type="PackedScene" uid="uid://b77e450ul3a23" path="res://scenes/enemy.tscn" id="19_daiq8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_daiq8"]
 texture = ExtResource("2_iyx0m")
@@ -151,3 +152,7 @@ tile_set = SubResource("TileSet_ij1v8")
 Speed = 600.0
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=415095711]
+
+[node name="Enemy" parent="." unique_id=183904500 node_paths=PackedStringArray("PlayerNode") instance=ExtResource("19_daiq8")]
+position = Vector2(831.90436, 1184.2942)
+PlayerNode = NodePath("../Player")
