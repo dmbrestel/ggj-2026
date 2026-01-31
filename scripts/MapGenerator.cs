@@ -15,6 +15,9 @@ public partial class MapGenerator : Node
 	[Export]
 	public  PackedScene Egg { get; set; }
 	
+	[Export]
+	public PackedScene Oxygen { get; set; }
+	
 	private const int Variations = 2;
 	
 	public override void _Ready()
@@ -239,9 +242,13 @@ public partial class MapGenerator : Node
 					var inside = x > 1 && x < Areas.Size.X - 2 && y > 1 && y < Areas.Size.Y - 2;
 					if (!inside) continue;
 					
-					if (rng.RandiRange(0, 100) < 10)
+					if (rng.RandiRange(0, 100) < 8)
 					{
 						PlaceObject(objectLayer, Ammunition, tilePosition);
+					}
+					else if (rng.RandiRange(0, 100) < 8)
+					{
+						PlaceObject(objectLayer, Oxygen, tilePosition);
 					}
 					else if (rng.RandiRange(0, 100) < 1)
 					{

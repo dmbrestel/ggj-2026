@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://d33lbahdea74b"]
+
+[ext_resource type="Script" uid="uid://bkcgn0k5xot0i" path="res://scenes/Oxygen.cs" id="1_uv03k"]
+[ext_resource type="Texture2D" uid="uid://cgptjl8in5pn1" path="res://art/Oxygen.png" id="2_vp3qr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qs44n"]
+size = Vector2(16, 46)
+
+[sub_resource type="LabelSettings" id="LabelSettings_enbtu"]
+font_size = 8
+
+[node name="Oxygen" type="Area2D" unique_id=1635025102]
+script = ExtResource("1_uv03k")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2064148226]
+position = Vector2(1, -2)
+scale = Vector2(0.059750006, 0.059750006)
+texture = ExtResource("2_vp3qr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=907807318]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_qs44n")
+
+[node name="Label" type="Label" parent="." unique_id=25190270]
+offset_left = -4.0
+offset_top = -6.0
+offset_right = 11.0
+offset_bottom = 17.0
+text = "0²"
+label_settings = SubResource("LabelSettings_enbtu")

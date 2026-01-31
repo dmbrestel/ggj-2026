@@ -159,4 +159,9 @@ public partial class Player : CharacterBody2D
 	}
 	
 	public static event Action EggCountChanged;
+
+	public void AddOxygen()
+	{
+		_oxygen = _maxOxygen;
+	}
 }
