@@ -199,7 +199,7 @@ public partial class MapGenerator : Node
 
 	private void SetCell(TileMapLayer layer, Vector2I position, int id)
 	{
-		layer.SetCell(position, id);
+		layer.SetCell(position, id, new Vector2I(0, 0));
 	}
 	
 	public override void _Process(double delta)
