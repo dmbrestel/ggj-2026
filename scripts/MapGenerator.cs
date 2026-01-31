@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using GGJ2026.scripts.terrain;
 using Godot;
 
@@ -164,10 +165,12 @@ public partial class MapGenerator : Node
 					var tilePosition = new Vector2I(areaPosition.X * Areas.Size.X + x, areaPosition.Y * Areas.Size.Y + y) + offset;
 					SetCell(terrainLayer, tilePosition, Terrain.Grass, rng);
 					
+					List<int> treeIDs = [1, 14, 15, 16];
+					
 					// Place trees randomly
 					if (rng.RandiRange(0, 100) < 30) // 30% chance to place a tree
 					{
-						SetCell(objectLayer, tilePosition, 1);
+						SetCell(objectLayer, tilePosition, treeIDs[rng.RandiRange(0, treeIDs.Count - 1)]);
 					}
 				}
 			}
@@ -224,7 +227,7 @@ public partial class MapGenerator : Node
 						else if (wy == 0) objectId = 8;
 						else if (wy == my) objectId = 3;
 						
-						SetCell(objectLayer, tilePosition, objectId);
+						SetCell(objectLayer, tilePosition - new Vector2I(0, 1), objectId);
 					}
 				}
 			}
